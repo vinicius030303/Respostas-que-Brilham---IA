@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Respostas que Brilham</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #121212; color: #f2f2f2; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 1rem; transition: background 0.5s; }
+    h1 { margin-bottom: 2rem; font-size: 2rem; color: #ffffff; text-shadow: 0 0 8px #00bfff; }
+    .container { width: 100%; max-width: 600px; text-align: center; }
+    input[type="text"] {
+      width: 100%; padding: 0.8rem; border: none; border-radius: 8px; font-size: 1rem;
+      margin-bottom: 1rem; outline: none; background: #1e1e1e; color: #fff;
+    }
+    button {
+      padding: 0.8rem 2rem; background: #00bfff; color: white; border: none;
+      border-radius: 8px; cursor: pointer; font-size: 1rem;
+    }
+    button:hover { background: #0099cc; }
+    .resposta {
+      margin-top: 2rem; font-size: 1.4rem; min-height: 3rem;
+      border-radius: 10px; padding: 1rem; transition: background 0.5s, color 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Respostas que Brilham ✨</h1>
+    <input type="text" id="pergunta" placeholder="Digite sua pergunta...">
+    <button onclick="responder()">Perguntar</button>
+    <div class="resposta" id="resposta"></div>
+  </div>
+
+  <script>
+    const respostaEl = document.getElementById('resposta');
+    const body = document.body;
+
+    const respostas = {
+      amor: {
+        texto: "O amor acende o que a lógica não alcança.",
+        cor: "#ff80ab"
+      },
+      fé: {
+        texto: "A fé enxerga no escuro o que a mente nega.",
+        cor: "#9575cd"
+      },
+      medo: {
+        texto: "O medo é a sombra da possibilidade. Caminhe assim mesmo.",
+        cor: "#ff7043"
+      },
+      vida: {
+        texto: "A vida pulsa nos silêncios que você não escuta.",
+        cor: "#4db6ac"
+      },
+      trabalho: {
+        texto: "Construa mesmo sem aplausos. O resultado será o som.",
+        cor: "#64b5f6"
+      },
+      vazio: {
+        texto: "A resposta que você busca já te encontrou. Você apenas não a reconheceu.",
+        cor: "#b0bec5"
+      }
+    };
+
+    function detectarTema(texto) {
+      texto = texto.toLowerCase();
+      if (texto.includes("amor")) return 'amor';
+      if (texto.includes("fé") || texto.includes("deus")) return 'fé';
+      if (texto.includes("medo") || texto.includes("ansiedade")) return 'medo';
+      if (texto.includes("vida") || texto.includes("morte")) return 'vida';
+      if (texto.includes("trabalho") || texto.includes("dinheiro")) return 'trabalho';
+      return 'vazio';
+    }
+
+    function escreverResposta(texto) {
+      respostaEl.textContent = '';
+      let i = 0;
+      const interval = setInterval(() => {
+        respostaEl.textContent += texto.charAt(i);
+        i++;
+        if (i >= texto.length) clearInterval(interval);
+      }, 45);
+    }
+
+    function responder() {
+      const input = document.getElementById('pergunta');
+      const pergunta = input.value.trim();
+      if (!pergunta) return;
+
+      const tema = detectarTema(pergunta);
+      const dados = respostas[tema];
+
+      body.style.background = dados.cor;
+      respostaEl.style.background = '#ffffff20';
+      respostaEl.style.color = '#fff';
+      escreverResposta(dados.texto);
+      input.value = '';
+    }
+  </script>
+</body>
+</html>
