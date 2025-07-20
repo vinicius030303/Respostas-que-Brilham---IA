@@ -4,7 +4,6 @@ Uma experiência interativa com toque emocional e poético. A aplicação simula
 
 > 🌈 Foco total em UI minimalista, lógica simbólica e interação emocional.
 
-https://github.com/vinicius030303/Respostas-que-Brilham---IA/blob/main/screenshot.png.png
 
 ---
 
